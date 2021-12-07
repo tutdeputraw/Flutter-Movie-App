@@ -30,7 +30,7 @@ class DetailReviewPageView extends StatelessWidget {
               init: DetailReviewPageController(),
               builder: (_) => !controller.isLoading
                   ? ListView.builder(
-                    cacheExtent: controller.getItemCount.toDouble(),
+                    cacheExtent: 9999,
                     shrinkWrap: true,
                     controller: ScrollController(),
                     itemCount: controller.getItemCount,

@@ -15,7 +15,7 @@ class DetailGenrePageView extends StatelessWidget {
         init: DetailGenrePageController(),
         builder: (_) => !controller.isLoading
             ? ListView.builder(
-                cacheExtent: controller.getItemCount.toDouble(),
+                cacheExtent: 9999,
                 controller: controller.scrollController,
                 padding: const EdgeInsets.symmetric(vertical: 16),
                 itemCount: controller.getItemCount,
