@@ -14,3 +14,5 @@ part 'detail_genre_page/detail_genre_page_view.dart';
 part 'detail_movie_page/detail_movie_page_view.dart';
 
 part 'detail_movie_page/components/appbar.dart';
+
+part 'detail_review_page/detail_review_page_view.dart';

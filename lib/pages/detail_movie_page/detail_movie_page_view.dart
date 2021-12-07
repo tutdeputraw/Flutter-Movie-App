@@ -112,24 +112,24 @@ class DetailMoviePageView extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(height: 16),
-          Container(
-            color: Colors.white,
-            // padding: const EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(16),
-                  child: const Text(
-                    'Trailer',
-                    style: TextStyle(
-                      fontSize: 16,
+          if (controller.getVideos!.isNotEmpty) ...[
+            const SizedBox(height: 16),
+            Container(
+              color: Colors.white,
+              // padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(16),
+                    child: const Text(
+                      'Trailer',
+                      style: TextStyle(
+                        fontSize: 16,
+                      ),
                     ),
                   ),
-                ),
-                YoutubePlayerBuilder(
-                  player: YoutubePlayer(
+                  YoutubePlayer(
                     controller: YoutubePlayerController(
                       initialVideoId: controller.getVideos![0].key,
                       flags: const YoutubePlayerFlags(
@@ -137,47 +137,64 @@ class DetailMoviePageView extends StatelessWidget {
                         mute: false,
                       ),
                     ),
+                    bottomActions: [
+                      FullScreenButton(),
+                      ProgressBar(isExpanded: true),
+                      RemainingDuration(),
+                    ],
                   ),
-                  builder: (context, player) => Column(
-                    children: [player],
-                  ),
-                ),
-
-                // SingleChildScrollView(
-                //   scrollDirection: Axis.horizontal,
-                //   child: Row(
-                //     children: [
-                //       const SizedBox(width: 8),
-                //       Row(
-                //         children: List.generate(
-                //           controller.getVideos!.length,
-                //           (index) => Container(
-                //             margin: const EdgeInsets.only(
-                //               left: 8,
-                //               right: 8,
-                //               bottom: 16,
-                //             ),
-                //             width: MediaQuery.of(context).size.width * 0.6,
-                //             child: YoutubePlayer(
-                //               controller: YoutubePlayerController(
-                //                 initialVideoId:
-                //                     controller.getVideos![index].key,
-                //                 flags: const YoutubePlayerFlags(
-                //                   autoPlay: false,
-                //                   mute: false,
-                //                 ),
-                //               ),
-                //             ),
-                //           ),
-                //         ),
-                //       ),
-                //       const SizedBox(width: 8),
-                //     ],
-                //   ),
-                // ),
-              ],
+                ],
+              ),
             ),
-          ),
+          ],
+          if (controller.getReviews!.reviews.isNotEmpty) ...[
+            const SizedBox(height: 16),
+            Container(
+              color: Colors.white,
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const Text(
+                    'Reviews',
+                    style: TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  Column(
+                    children: List.generate(
+                      1,
+                      (i) => Card(
+                        elevation: 5,
+                        child: ListTile(
+                          title: Text(controller.getReviews!.reviews[i].author),
+                          subtitle: Text(controller.getReviews!.reviews[i].content),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  ElevatedButton(
+                    onPressed: controller.seeAllOnClick,
+                    child: const Text('See All Reviews'),
+                  ),
+                ],
+              ),
+            ),
+          ] else ...[
+            Container(
+              color: Colors.white,
+              // alignment: Alignment.center,
+              padding: const EdgeInsets.all(16),
+              child: const Text(
+                'Empty Reviews',
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+              ),
+            ),
+          ],
         ],
       ),
     );

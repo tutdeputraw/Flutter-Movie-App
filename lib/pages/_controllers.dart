@@ -9,3 +9,5 @@ part 'home_page/home_page_controller.dart';
 part 'detail_movie_page/detail_movie_page_controller.dart';
 
 part 'detail_genre_page/detail_genre_page_controller.dart';
+
+part 'detail_review_page/detail_review_page_controller.dart';
