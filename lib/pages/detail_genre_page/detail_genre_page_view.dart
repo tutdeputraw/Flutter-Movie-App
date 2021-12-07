@@ -65,16 +65,26 @@ class DetailGenrePageView extends StatelessWidget {
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  Text(data.id.toString()),
                 ],
               ),
             ),
             const SizedBox(width: 8),
             Expanded(
               flex: -1,
-              child: Text(
-                data.voteAverage.toString(),
-                textAlign: TextAlign.end,
+             child: Row(
+                children: [
+                  Icon(
+                    Icons.star_outlined,
+                    color: Colors.amber[700],size: 16,
+                  ),
+                  const SizedBox(width: 3),
+                  Text(
+                    data.voteAverage.toString(),
+                    style: const TextStyle(
+                      fontSize: 14,
+                    ),
+                  )
+                ],
               ),
             )
           ],
